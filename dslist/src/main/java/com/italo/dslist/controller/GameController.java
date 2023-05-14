@@ -3,11 +3,12 @@ package com.italo.dslist.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.italo.dslist.dto.GameDTO;
-import com.italo.dslist.model.Game;
+import com.italo.dslist.dto.GameToDTO;
 import com.italo.dslist.services.GameService;
 
 @RestController
@@ -22,5 +23,10 @@ public class GameController {
     @GetMapping("")
     public List<GameDTO> findAll(){
         return gameService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public GameToDTO findById(@PathVariable Long id){
+        return gameService.findById(id);
     }
 }
