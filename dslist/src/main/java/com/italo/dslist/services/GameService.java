@@ -8,6 +8,7 @@ import com.italo.dslist.repository.GameRepository;
 import com.italo.dslist.dto.GameDTO;
 import com.italo.dslist.dto.GameToDTO;
 import com.italo.dslist.model.Game;
+import com.italo.dslist.projections.GameMinProjection;
 
 @Service
 public class GameService {
@@ -20,6 +21,13 @@ public class GameService {
     @Transactional(readOnly = true)
     public List<GameDTO> listAll(){
         return gameRepository.findAll()
+            .stream()
+            .map(x -> new GameDTO(x)).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameDTO> findByList(Long listId){
+        return gameRepository.searchByList(listId)
             .stream()
             .map(x -> new GameDTO(x)).toList();
     }
